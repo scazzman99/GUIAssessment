@@ -75,12 +75,14 @@ namespace GUIAssignment
         //gets intensity of sceneLight and sets brightness slider to this value
         public void GetBrightness()
         {
+            //set brightslider value to scenelight intensity
             brightSlider.value = sceneLight.intensity;
         }
 
         //gets intensity of world ambient lighting and sets ambient slider to this value
         public void GetAmbientBrightness()
         {
+            //set ambient slider value to ambinet light intensity
             ambientSlider.value = RenderSettings.ambientIntensity;
         }
 
@@ -324,7 +326,7 @@ namespace GUIAssignment
             //set a default value for index. if this value doesnt change they keybind wont start
             int index = -1;
 
-            //search through keybindsL to find the index our keybind is at
+            //loop through keybindsL to find the index our keybind is at
             for (int i = 0; i < keyBindsL.Capacity; i++)
             {
                 //if the keybinds match
@@ -391,7 +393,7 @@ namespace GUIAssignment
             keyBindsL[6] = KeyCode.LeftShift;
             keyBindsL[7] = KeyCode.F;
 
-            //set the text for the buttons to string of keycode from keyBindsL.
+            //loop through list of keybinds and set the text for the buttons to string of keycode from list.
             for (int i = 0; i < keyBindsL.Capacity; i++)
             {
                 keyBindButtonText[i].text = keyBindsL[i].ToString();
@@ -434,6 +436,7 @@ namespace GUIAssignment
                                 //update the dictionary
                                 UpdateDictionary();
                             }
+                            //else
                             else
                             {
                                 //set the keycode at i to the holding key
