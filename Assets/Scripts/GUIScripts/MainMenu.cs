@@ -12,14 +12,10 @@ namespace GUIAssignment
 
         private void Start()
         {
-            //get the scene light to be used in brightness set and get
-            sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light>();
-
+            //load all settings
+            LoadSettings();
             //Load the keybinds
             SetUpKeyBinds();
-
-            //Get the values for scene settings and apply them
-            GetSavedOptions();
         }
 
         #region MainMenuSpecificButtonFunctions

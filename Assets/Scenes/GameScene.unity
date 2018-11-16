@@ -1216,6 +1216,10 @@ Prefab:
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 322774034}
+    - target: {fileID: 1425729433858688, guid: 2b9a48c1d44805e4dadb852c94201c80, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b9a48c1d44805e4dadb852c94201c80, type: 2}
   m_IsPrefabAsset: 0
@@ -2157,11 +2161,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1679378652372090, guid: 2a6f374ae7912d54da2594cd3d552259,
     type: 2}
   m_PrefabInternal: {fileID: 1670882494}
---- !u!1 &1670882496 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1014110491042866, guid: 2a6f374ae7912d54da2594cd3d552259,
-    type: 2}
-  m_PrefabInternal: {fileID: 1670882494}
 --- !u!1 &1670882497 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1125792953572396, guid: 2a6f374ae7912d54da2594cd3d552259,
@@ -2213,36 +2212,6 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1670882495}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 322774034}
-          m_MethodName: Play
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  delegates: []
---- !u!114 &1670882507
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1670882496}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}

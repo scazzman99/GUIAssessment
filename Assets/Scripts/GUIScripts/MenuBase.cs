@@ -1,5 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+//system.xml and IO used for file saving
+using System.Xml.Serialization;
+using System.Xml;
+using System.IO;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -7,10 +11,21 @@ using UnityEngine.EventSystems;
 //needed for the mixer
 using UnityEngine.Audio;
 
+
 namespace GUIAssignment
 {
+
+    public class OptionsData
+    {
+        public float volSlider, brightSlider, ambientSlider;
+        public KeyCode forward, backward, left, right, jump, crouch, sprint, interact;
+        public bool fullScreen;
+        public Resolution res;
+    }
     public abstract class MenuBase : MonoBehaviour
     {
+
+
 
         #region CoreVariables
 
@@ -48,6 +63,9 @@ namespace GUIAssignment
         public List<KeyCode> keyBindsL;
         //array of text objects to store buttons displayed text. Set from inspector
         public Text[] keyBindButtonText;
+        [Header("Saving Stuff")]
+        public OptionsData data = new OptionsData();
+        private string filePath, fileName = "Game Data";
         #endregion
 
         #region OptionGet&SetFunctions
@@ -64,11 +82,14 @@ namespace GUIAssignment
             //float to hold the output of GetFloat()
             float value;
             hasValue = gameAudio.GetFloat("MasterVolume", out value);
+            Debug.Log("MasterVol 1 " + value);
+
             //if a value was returned
             if (hasValue)
             {
                 //set volume slider value to audio mixer volume
                 volSlider.value = value;
+                Debug.Log("MasterVol 2 " + value);
             }
         }
 
@@ -122,21 +143,6 @@ namespace GUIAssignment
 
         }
 
-        //gets the slider values from a previous session
-        public void GetSavedOptions()
-        {
-            //get the intensity for the scene light
-            sceneLight.intensity = PlayerPrefs.GetFloat("BrightnessSetting", 1f);
-            //get the intensity for the ambient light
-            RenderSettings.ambientIntensity = PlayerPrefs.GetFloat("AmbientSetting", 1f);
-            //get the saved value for volume
-            float saveVolume = PlayerPrefs.GetFloat("VolumeSetting");
-            //set the audio mixer volume to saved value
-            gameAudio.SetFloat("MasterVolume", saveVolume);
-        }
-
-     
-
         #endregion
 
 
@@ -147,7 +153,7 @@ namespace GUIAssignment
             //set mixer volume to volSlider value
             gameAudio.SetFloat("MasterVolume", value);
             //save the value to be reloaded on reboot
-            PlayerPrefs.SetFloat("VolumeSetting", value);
+            //PlayerPrefs.SetFloat("VolumeSetting", value);
         }
 
         //Sets the brightness of sceneLight to the slider value using dynamic float
@@ -155,7 +161,7 @@ namespace GUIAssignment
         {
             sceneLight.intensity = value;
             //save the new value to be carried over scenes
-            PlayerPrefs.SetFloat("BrightnessSetting", value);
+            //PlayerPrefs.SetFloat("BrightnessSetting", value);
         }
 
         //Sets the intenstity of ambient lighting to the slider value using dynamic float
@@ -163,7 +169,7 @@ namespace GUIAssignment
         {
             RenderSettings.ambientIntensity = value;
             //save the new value to be carried over scenes
-            PlayerPrefs.SetFloat("AmbientSetting", value);
+            //PlayerPrefs.SetFloat("AmbientSetting", value);
         }
 
         //Set the screens resolution to the resolution at index of dropdown
@@ -180,7 +186,7 @@ namespace GUIAssignment
         public void SetFullScreen(bool value)
         {
             Screen.fullScreen = value;
-            
+
         }
         #endregion
 
@@ -217,7 +223,7 @@ namespace GUIAssignment
                 GetBrightness();
                 GetVolume();
                 GetResolutions();
-                
+
             }
         }
 
@@ -242,7 +248,7 @@ namespace GUIAssignment
                 GetBrightness();
                 GetVolume();
                 GetResolutions();
-                
+
             }
             else
             {
@@ -266,14 +272,14 @@ namespace GUIAssignment
         {
 
             //parse the result of getstring to a keycode. If no keycode is found at string key 'Forward; then set to 'W'.
-            forward = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Forward", "W"));
-            backward = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Backward", "S"));
-            left = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Left", "A"));
-            right = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Right", "D"));
-            jump = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Jump", "Space"));
-            crouch = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Crouch", "LeftControl"));
-            sprint = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Sprint", "LeftShift"));
-            interact = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Interact", "F"));
+            //forward = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Forward", "W"));
+            // backward = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Backward", "S"));
+            // left = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Left", "A"));
+            //right = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Right", "D"));
+            //jump = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Jump", "Space"));
+            //crouch = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Crouch", "LeftControl"));
+            //sprint = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Sprint", "LeftShift"));
+            //interact = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Interact", "F"));
 
             //add the keycodes to the list of keybinds
             keyBindsL.Add(forward);
@@ -358,32 +364,11 @@ namespace GUIAssignment
 
         #region KeybindSaveAndDefault
 
-        public void KeyCodeSave()
-        {
-            //set the keycode saved at 'Forward' to the keycode string from dictionary. Same for all following SetStrings
-            PlayerPrefs.SetString("Forward", keyBindsD["Forward"].ToString());
-            PlayerPrefs.SetString("Backward", keyBindsD["Backward"].ToString());
-            PlayerPrefs.SetString("Left", keyBindsD["Left"].ToString());
-            PlayerPrefs.SetString("Right", keyBindsD["Right"].ToString());
-            PlayerPrefs.SetString("Jump", keyBindsD["Jump"].ToString());
-            PlayerPrefs.SetString("Crouch", keyBindsD["Crouch"].ToString());
-            PlayerPrefs.SetString("Sprint", keyBindsD["Sprint"].ToString());
-            PlayerPrefs.SetString("Interact", keyBindsD["Interact"].ToString());
-        }
+       
 
         public void KeyCodeDefaults()
         {
-            //set the string at 'Forward' to the string of the default keycode. Same for all others
-            PlayerPrefs.SetString("Forward", KeyCode.W.ToString());
-            PlayerPrefs.SetString("Backward", KeyCode.S.ToString());
-            PlayerPrefs.SetString("Left", KeyCode.A.ToString());
-            PlayerPrefs.SetString("Right", KeyCode.D.ToString());
-            PlayerPrefs.SetString("Jump", KeyCode.Space.ToString());
-            PlayerPrefs.SetString("Crouch", KeyCode.LeftControl.ToString());
-            PlayerPrefs.SetString("Sprint", KeyCode.LeftShift.ToString());
-            PlayerPrefs.SetString("Interact", KeyCode.F.ToString());
-
-            //manually set each index in list of keycodes to defualt values
+            //set list values to default
             keyBindsL[0] = KeyCode.W;
             keyBindsL[1] = KeyCode.S;
             keyBindsL[2] = KeyCode.A;
@@ -469,5 +454,95 @@ namespace GUIAssignment
         }
         #endregion
 
+        #region Saving&Loading
+        public void SaveSettings()
+        {
+            //set values in options data to meu values
+            data.volSlider = volSlider.value;
+            data.brightSlider = brightSlider.value;
+            data.ambientSlider = ambientSlider.value;
+            data.forward = keyBindsD["Forward"];
+            data.backward = keyBindsD["Backward"];
+            data.left = keyBindsD["Left"];
+            data.right = keyBindsD["Right"];
+            data.jump = keyBindsD["Jump"];
+            data.crouch = keyBindsD["Crouch"];
+            data.sprint = keyBindsD["Sprint"];
+            data.interact = keyBindsD["Interact"];
+            data.res = resolutions[resIndex];
+
+            var serializer = new XmlSerializer(typeof(OptionsData));
+
+            //while using file stream
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                serializer.Serialize(stream, data);
+            }
+
+        }
+
+        public void LoadSettings()
+        {
+            //open the file stream and read in to data
+            var serializer = new XmlSerializer(typeof(OptionsData));
+
+            using (var stream = new FileStream(filePath, FileMode.Open))
+            {
+                //read data from file in as OptionsData
+                data = serializer.Deserialize(stream) as OptionsData;
+            }
+
+            //set menu variables and keybinds to read data
+            forward = data.forward;
+            backward = data.backward;
+            left = data.left;
+            right = data.right;
+            jump = data.jump;
+            crouch = data.crouch;
+            sprint = data.sprint;
+            interact = data.interact;
+
+            float saveVolume = data.volSlider;
+            gameAudio.SetFloat("MasterVolume", saveVolume);
+
+            bool hasVol;
+            float volVar;
+            hasVol = gameAudio.GetFloat("MasterVolume", out volVar);
+            if (hasVol)
+            {
+                Debug.Log("MasterVol is set to " + volVar);
+            }
+
+            sceneLight.intensity = data.brightSlider;
+            RenderSettings.ambientIntensity = data.ambientSlider;
+            Screen.fullScreen = data.fullScreen;
+        }
+        #endregion
+
+        private void Awake()
+        {
+            //get the scene light to be used in brightness set and get
+            sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light>();
+            //get file path for save file
+            filePath = Application.dataPath + "/Data/" + fileName + ".xml";
+            //if the file exists
+            if (File.Exists(filePath))
+            {
+                //load the file
+                LoadSettings();
+            }
+            else
+            {
+                //set keycodes to defaults
+                forward = KeyCode.W;
+                backward = KeyCode.S;
+                left = KeyCode.A;
+                right = KeyCode.D;
+                jump = KeyCode.Space;
+                crouch = KeyCode.LeftControl;
+                sprint = KeyCode.LeftShift;
+                interact = KeyCode.E;
+            }
+        }
     }
 }
