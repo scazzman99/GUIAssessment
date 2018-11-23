@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<OptionsData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <volSlider>0</volSlider>
+  <brightSlider>1</brightSlider>
+  <ambientSlider>1</ambientSlider>
+  <forward>W</forward>
+  <backward>S</backward>
+  <left>A</left>
+  <right>D</right>
+  <jump>Space</jump>
+  <crouch>LeftControl</crouch>
+  <sprint>LeftShift</sprint>
+  <interact>E</interact>
+  <fullScreen>false</fullScreen>
+  <res>
+    <width>1920</width>
+    <height>1080</height>
+    <refreshRate>60</refreshRate>
+  </res>
+</OptionsData>

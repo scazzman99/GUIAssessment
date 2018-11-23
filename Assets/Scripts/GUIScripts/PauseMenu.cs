@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.IO;
+
 
 namespace GUIAssignment
 {
@@ -21,7 +23,7 @@ namespace GUIAssignment
         void Start()
         {
 
-            LoadSettings();
+            CheckLoad();
             //Load the keybinds
             SetUpKeyBinds();
             

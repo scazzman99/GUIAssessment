@@ -65,9 +65,13 @@ namespace GUIAssignment
         public Text[] keyBindButtonText;
         [Header("Saving Stuff")]
         public OptionsData data = new OptionsData();
-        private string filePath, fileName = "Game Data";
+        private string filePath, fileName = "GameData";
         #endregion
+        [SerializeField]
+        private TextAsset
+    xmlFile;
 
+     
         #region OptionGet&SetFunctions
 
 
@@ -521,12 +525,25 @@ namespace GUIAssignment
 
         private void Awake()
         {
+            CheckLoad();
+        }
+
+        public void CheckLoad()
+        {
+            forward = KeyCode.W;
+            backward = KeyCode.S;
+            left = KeyCode.A;
+            right = KeyCode.D;
+            jump = KeyCode.Space;
+            crouch = KeyCode.LeftControl;
+            sprint = KeyCode.LeftShift;
+            interact = KeyCode.E;
             //get the scene light to be used in brightness set and get
             sceneLight = GameObject.FindGameObjectWithTag("SceneLight").GetComponent<Light>();
             //get file path for save file
-            filePath = Application.dataPath + "/Data/" + fileName + ".xml";
+            filePath = Application.persistentDataPath + "/" + fileName + ".xml";
             //if the file exists
-            if (File.Exists(filePath))
+           if (File.Exists(filePath))
             {
                 //load the file
                 LoadSettings();

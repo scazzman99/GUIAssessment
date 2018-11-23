@@ -12,8 +12,7 @@ namespace GUIAssignment
 
         private void Start()
         {
-            //load all settings
-            LoadSettings();
+            CheckLoad();
             //Load the keybinds
             SetUpKeyBinds();
         }
