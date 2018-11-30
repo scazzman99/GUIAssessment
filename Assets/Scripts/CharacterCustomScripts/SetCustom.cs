@@ -1,12 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Xml.Serialization;
+using System.IO;
+using System.Xml;
+
+public class CustomizeData
+{
+    public int armI, handI, legI, torsoI, headI, hairI, mouthI, eyesI, eyebrowsI;
+    public int strCur, dexCur, conCur, intCur, wisCur, charCur;
+}
 
 public class SetCustom : MonoBehaviour
 {
 
 
     #region Variables
+    
     [Header("Player")]
     public GameObject player;
 
@@ -39,7 +49,7 @@ public class SetCustom : MonoBehaviour
     [Header("SpriteRenderers")]
     Dictionary<string, SpriteRenderer> playerSpriteRenders = new Dictionary<string, SpriteRenderer>();
     [Header("PlayerStats")]
-    public string playerName = "";
+    public string playerName;
     //points the player can spend on stats
     public int pointsToSpend = 10;
     //min values for all player stats per class
@@ -56,7 +66,18 @@ public class SetCustom : MonoBehaviour
     bool showClasses;
     Vector2 scrollPos;
 
+    //an instance of CustomizeData to save to and load into
+    CustomizeData data = new CustomizeData();
+    //file path and name
+    string filePath, fileName = "CharData";
+
     #endregion
+
+    private void Awake()
+    {
+        filePath = Application.persistentDataPath + "/" + fileName + ".xml";
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -643,7 +664,15 @@ public class SetCustom : MonoBehaviour
         }
         #endregion
 
-        GUI.TextField(new Rect(scrW * 5f, scrH * 7f, scrW * 6f, scrH), playerName);
+        playerName = GUI.TextField(new Rect(scrW * 5f, scrH * 7f, scrW * 6f, scrH*0.75f), playerName, 16);
+
+        if (pointsToSpend == 0 && playerName != "")
+        {
+            if (GUI.Button(new Rect(scrW * 7f, scrH * 8f, scrW * 2f, scrH * 0.5f), "Save and Play"))
+            {
+                SaveData();
+            } 
+        }
 
     }
     #endregion
@@ -762,6 +791,33 @@ public class SetCustom : MonoBehaviour
             statVals[i] = minStatVals[i];
         }
         pointsToSpend = 10;
+    }
+
+    //Saves the stat data and customization data
+    private void SaveData()
+    {
+        data.armI = armI;
+        data.handI = handI;
+        data.headI = headI;
+        data.mouthI = mouthI;
+        data.eyebrowsI = eyebrowsI;
+        data.eyesI = eyesI;
+        data.hairI = hairI;
+        data.legI = legI;
+        data.torsoI = torsoI;
+        data.strCur = strCur;
+        data.dexCur = dexCur;
+        data.conCur = conCur;
+        data.intCur = intCur;
+        data.wisCur = wisCur;
+        data.charCur = charCur;
+
+        var serializer = new XmlSerializer(typeof(CustomizeData));
+
+        using(var stream = new FileStream(filePath, FileMode.Create))
+        {
+            serializer.Serialize(stream, data);
+        }
     }
 
 }
