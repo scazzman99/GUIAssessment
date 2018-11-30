@@ -4,6 +4,8 @@ using UnityEngine;
 using System.Xml.Serialization;
 using System.IO;
 using System.Xml;
+using UnityEngine.SceneManagement;
+
 
 public class CustomizeData
 {
@@ -14,7 +16,8 @@ public class CustomizeData
 public class SetCustom : MonoBehaviour
 {
 
-
+    ColorPicker pick = new ColorPicker();
+   
     #region Variables
     
     [Header("Player")]
@@ -75,7 +78,9 @@ public class SetCustom : MonoBehaviour
 
     private void Awake()
     {
+        //grab the applications file path and set filePath to returned value
         filePath = Application.persistentDataPath + "/" + fileName + ".xml";
+        
     }
 
     // Use this for initialization
@@ -671,6 +676,7 @@ public class SetCustom : MonoBehaviour
             if (GUI.Button(new Rect(scrW * 7f, scrH * 8f, scrW * 2f, scrH * 0.5f), "Save and Play"))
             {
                 SaveData();
+                SceneManager.LoadScene(2);
             } 
         }
 
@@ -805,12 +811,12 @@ public class SetCustom : MonoBehaviour
         data.hairI = hairI;
         data.legI = legI;
         data.torsoI = torsoI;
-        data.strCur = strCur;
-        data.dexCur = dexCur;
-        data.conCur = conCur;
-        data.intCur = intCur;
-        data.wisCur = wisCur;
-        data.charCur = charCur;
+        data.strCur = statVals[0];
+        data.dexCur = statVals[1];
+        data.conCur = statVals[2];
+        data.intCur = statVals[3];
+        data.wisCur = statVals[4];
+        data.charCur = statVals[5];
 
         var serializer = new XmlSerializer(typeof(CustomizeData));
 

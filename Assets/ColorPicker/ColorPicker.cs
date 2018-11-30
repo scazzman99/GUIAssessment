@@ -189,9 +189,9 @@ public class ColorPicker : MonoBehaviour {
 
 		Vector2 mousePos = Event.current.mousePosition;
 		Event e = Event.current;
-		bool isLeftMBtnClicked = e.type == EventType.mouseUp;
+		bool isLeftMBtnClicked = e.type == EventType.MouseUp;
 		bool isLeftMBtnDragging = e.type == EventType.MouseDrag;
-		bool openCondition = (rectFullSize.Contains(e.mousePosition) && (((e.type == EventType.MouseUp || e.type == EventType.mouseDrag || e.type == EventType.MouseMove) && e.isMouse)));
+		bool openCondition = (rectFullSize.Contains(e.mousePosition) && (((e.type == EventType.MouseUp || e.type == EventType.MouseDrag || e.type == EventType.MouseMove) && e.isMouse)));
 		bool closeCondition = isLeftMBtnClicked || (!rectFullSize.Contains(e.mousePosition)) && (e.isMouse && (e.type == EventType.MouseMove || e.type == EventType.MouseDown));
 		if(openCondition && (activeColorPicker == null || activeColorPicker.mState == ESTATE.Hidden))
 		{
