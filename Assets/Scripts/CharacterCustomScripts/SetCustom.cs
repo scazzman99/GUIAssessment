@@ -9,6 +9,7 @@ public class SetCustom : MonoBehaviour
     #region Variables
     [Header("Player")]
     public GameObject player;
+
     [Header("SpriteLists")]
     public List<Sprite> armRList = new List<Sprite>();
     public List<Sprite> armLList = new List<Sprite>();
@@ -37,8 +38,23 @@ public class SetCustom : MonoBehaviour
     handMax, hairMax, mouthMax, eyesMax, headMax, eyebrowsMax;
     [Header("SpriteRenderers")]
     Dictionary<string, SpriteRenderer> playerSpriteRenders = new Dictionary<string, SpriteRenderer>();
-
-
+    [Header("PlayerStats")]
+    public string playerName = "";
+    //points the player can spend on stats
+    public int pointsToSpend = 10;
+    //min values for all player stats per class
+    public int strMin, dexMin, conMin, intMin, wisMin, charMin;
+    //current values for all player stats per class
+    public int strCur, dexCur, conCur, intCur, wisCur, charCur;
+    //arrays to hold stats and min stats. Must match order of string array stats
+    public int[] statVals, minStatVals;
+    //array of strings to store stat names
+    public string[] stats;
+    //the players class
+    public CharClasses playerClass = CharClasses.BigBoi;
+    public CharClasses[] classes;
+    bool showClasses;
+    Vector2 scrollPos;
 
     #endregion
     // Use this for initialization
@@ -48,6 +64,14 @@ public class SetCustom : MonoBehaviour
         GetSprites();
         GetSpriteRenderers();
         //print(playerSpriteRenders.ContainsKey("ShinL"));
+        //define classes array
+        
+        classes = new CharClasses[] { CharClasses.BigBoi, CharClasses.Engineer, CharClasses.GenericMarine, CharClasses.Pilot, CharClasses.SpaceWizard, CharClasses.SpookyM8 };
+        stats = new string[] { "Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma" };
+        minStatVals = new int[stats.Length];
+        statVals = new int[stats.Length];
+        GetStats(playerClass);
+
     }
 
     // Update is called once per frame
@@ -170,6 +194,8 @@ public class SetCustom : MonoBehaviour
         float scrH = Screen.height / 9f;
         //set up int to space customisation buttons downwards
         int buttonAdjust = 0;
+
+        #region CustomizationButtons
 
         #region HeadButtons
         //if "-" button is pressed for head
@@ -296,14 +322,14 @@ public class SetCustom : MonoBehaviour
             if (eyebrowsI < 0)
             {
                 //set headI to headMax - 1 to loop around
-                eyebrowsI = hairMax - 1;
+                eyebrowsI = eyebrowsMax - 1;
             }
 
             //Change the sprite with sprite at index headI in headList. String used here must match object in inspector
-            SetSprite("Hair", eyebrowsI);
+            SetSprite("Eyebrows", eyebrowsI);
         }
 
-        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Hair: " + eyebrowsI);
+        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Eyebrows: " + eyebrowsI);
 
         //if "+" button is pressed for head
         if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "+"))
@@ -311,16 +337,18 @@ public class SetCustom : MonoBehaviour
             //add 1 to headI
             eyebrowsI++;
             //if headI is equal to or greater than headMax
-            if (eyebrowsI >= hairMax)
+            if (eyebrowsI >= eyebrowsMax)
             {
                 //set headI to 0 to loop around
                 eyebrowsI = 0;
             }
 
             //Change the sprite with sprite at index headI in headList. String used here must match object in inspector
-            SetSprite("Hair", eyebrowsI);
+            SetSprite("Eyebrows", eyebrowsI);
         }
         #endregion
+
+        buttonAdjust++;
 
         #region MouthButtons
         //if "-" button is pressed for mouth
@@ -353,10 +381,270 @@ public class SetCustom : MonoBehaviour
                 mouthI = 0;
             }
 
-            //Change the sprite with sprite at index headI in headList. String used here must match object in inspector
-            SetSprite("Mouth", hairI);
+            //Change the sprite with sprite at index mouthI in mouthList. String used here must match object in inspector
+            SetSprite("Mouth", mouthI);
         }
         #endregion
+
+        buttonAdjust++;
+
+        //for torso we will simultaniously change torso and pelvis using torsoI
+        #region Torso
+        //if "-" button is pressed for torso
+        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "-"))
+        {
+            //take 1 from torsoI
+            torsoI--;
+            //if torsoI is less than 0
+            if (torsoI < 0)
+            {
+                //set torsoI to torsoMax - 1 to loop around
+                torsoI = torsoMax - 1;
+            }
+
+            //Change the sprite with sprite at index torsoI in torsoList. String used here must match object in inspector
+            SetSprite("Torso", torsoI);
+            //Change the sprite with sprite at index torsoI in pelvisList. String used here must match object in inspector
+            SetSprite("Pelvis", torsoI);
+
+        }
+
+        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Torso: " + torsoI);
+
+        //if "+" button is pressed for torso
+        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "+"))
+        {
+            //add 1 to torso
+            torsoI++;
+            //if torsoI is equal to or greater than torsoMax
+            if (torsoI >= torsoMax)
+            {
+                //set torsoI to 0 to loop around
+                torsoI = 0;
+            }
+
+            //Change the sprite with sprite at index torsoI in torsoList. String used here must match object in inspector
+            SetSprite("Torso", torsoI);
+            //Change the sprite with sprite at index torsoI in pelvisList. String used here must match object in inspector
+            SetSprite("Pelvis", torsoI);
+        }
+        #endregion
+
+        buttonAdjust++;
+
+        //will change left and right legs and shins at the same time using legI
+        #region Legs
+        //if "-" button is pressed for legs
+        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "-"))
+        {
+            //take 1 from legI
+            legI--;
+            //if legI is less than 0
+            if (legI < 0)
+            {
+                //set legI to legMax - 1 to loop around
+                legI = legMax - 1;
+            }
+
+            //Change the sprite with sprite at index legI in shinRList and shinLList. String used here must match object in inspector
+            SetSprite("ShinL", legI);
+            SetSprite("ShinR", legI);
+            //Change the sprite with sprite at index legI in legRList and legLList. String used here must match object in inspector
+            SetSprite("LegL", legI);
+            SetSprite("LegR", legI);
+
+
+        }
+
+        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Legs: " + legI);
+
+        //if "+" button is pressed for torso
+        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "+"))
+        {
+            //add 1 to leg
+            legI++;
+            //if legI is equal to or greater than legMax
+            if (legI >= legMax)
+            {
+                //set legI to 0 to loop around
+                legI = 0;
+            }
+
+            //Change the sprite with sprite at index legI in shinRList and shinLList. String used here must match object in inspector
+            SetSprite("ShinL", legI);
+            SetSprite("ShinR", legI);
+            //Change the sprite with sprite at index legI in legRList and legLList. String used here must match object in inspector
+            SetSprite("LegL", legI);
+            SetSprite("LegR", legI);
+        }
+        #endregion
+
+        buttonAdjust++;
+
+        //will change left and right arms & forearms at the same time using armI
+        #region Arms
+        //if "-" button is pressed for arms
+        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "-"))
+        {
+            //take 1 from armI
+            armI--;
+            //if legI is less than 0
+            if (armI < 0)
+            {
+                //set armI to armMax - 1 to loop around
+                armI = armMax - 1;
+            }
+
+            //Change the sprite with sprite at index armI in armRList and armLList. String used here must match object in inspector
+            SetSprite("ArmL", armI);
+            SetSprite("ArmR", armI);
+            //Change the sprite with sprite at index armI in forearmRList and forearmLList. String used here must match object in inspector
+            SetSprite("ForearmL", armI);
+            SetSprite("ForearmR", armI);
+
+
+        }
+
+        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Arms: " + armI);
+
+        //if "+" button is pressed for torso
+        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "+"))
+        {
+            //add 1 to arm
+            armI++;
+            //if armI is equal to or greater than armMax
+            if (armI >= armMax)
+            {
+                //set armI to 0 to loop around
+                armI = 0;
+            }
+
+            //Change the sprite with sprite at index armI in armRList and armLList. String used here must match object in inspector
+            SetSprite("ArmL", armI);
+            SetSprite("ArmR", armI);
+            //Change the sprite with sprite at index armI in forearmRList and forearmLList. String used here must match object in inspector
+            SetSprite("ForearmL", armI);
+            SetSprite("ForearmR", armI);
+        }
+        #endregion
+
+        buttonAdjust++;
+
+        //set both left and right hands at the same time using handI
+        #region Hands
+        //if "-" button is pressed for hands
+        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "-"))
+        {
+            //take 1 from handI
+            handI--;
+            //if handI is less than 0
+            if (handI < 0)
+            {
+                //set handI to handMax - 1 to loop around
+                handI = handMax - 1;
+            }
+
+            //Change the sprite with sprite at index handI in handList. String used here must match object in inspector
+            SetSprite("HandL", handI);
+            SetSprite("HandR", handI);
+        }
+
+        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Hand: " + handI);
+
+        //if "+" button is pressed for hand
+        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "+"))
+        {
+            //add 1 to hand
+            handI++;
+            //if handI is equal to or greater than handMax
+            if (handI >= handMax)
+            {
+                //set handI to 0 to loop around
+                handI = 0;
+            }
+
+            //Change the sprite with sprite at index handI in handRList and handLList. String used here must match object in inspector
+            SetSprite("HandR", handI);
+            SetSprite("HandL", handI);
+            
+
+        }
+        #endregion
+
+        #endregion
+
+        buttonAdjust++;
+
+        //make a toggle that opens and closes 
+        //showClasses = GUI.Toggle(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2f, scrH * 0.5f), showClasses, "Classes");
+        if(GUI.Button(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2f, scrH * 0.5f), playerClass.ToString()))
+        {
+            showClasses = !showClasses;
+        }
+
+       
+        buttonAdjust++;
+
+        #region ClassScroll
+        //if showClasses
+        if (showClasses)
+        {
+            //begin the scroll window
+            scrollPos = GUI.BeginScrollView(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 3f, scrH * 2f), scrollPos, new Rect(0f, 0f, 0f, scrH * 2 + (classes.Length - 4) * scrH * 0.5f), false, true);
+
+            //loop through the array of classes
+            for (int i = 0; i < classes.Length; i++)
+            {
+                //if class button is pressed
+                if (GUI.Button(new Rect(scrW * 0.5f, 0f + i * scrH * 0.5f, scrW * 2f, scrH * 0.5f), classes[i].ToString()))
+                {
+                    playerClass = classes[i];
+                    //run function to change default stats etc
+                    GetStats(playerClass);
+                }
+            }
+
+            //end the scroll window
+            GUI.EndScrollView();
+        }
+        #endregion
+
+        buttonAdjust = 0;
+
+        #region StatButtons
+        for (int i = 0; i < stats.Length; i++)
+        {
+            if (statVals[i] > minStatVals[i])
+            {
+                if (GUI.Button(new Rect(scrW * 12.5f, scrH + i * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "-"))
+                {
+                    //decrease the stat
+                    statVals[i]--;
+                    //increase points to spend
+                    pointsToSpend++;
+                }
+            }
+
+            GUI.Box(new Rect(scrW * 13f, scrH + i * (scrH * 0.5f), scrW * 2, scrH * 0.5f), stats[i] + ": " + statVals[i]);
+
+            if (pointsToSpend > 0)
+            {
+                //if "+" button is pressed for hand
+                if (GUI.Button(new Rect(scrW * 15f, scrH + i * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "+"))
+                {
+                    //up the stat being spent
+                    statVals[i]++;
+                    //deplete the points to spend
+                    pointsToSpend--;
+                }
+            }
+            buttonAdjust++;
+
+        }
+        #endregion
+
+        GUI.TextField(new Rect(scrW * 5f, scrH * 7f, scrW * 6f, scrH), playerName);
+
     }
     #endregion
 
@@ -437,6 +725,45 @@ public class SetCustom : MonoBehaviour
                 break;
         }
     }
+
+    //gets the min stats for a class and sets the players current stats to minimums. Also restores point count to 10
+    private void GetStats(CharClasses playerClass)
+    {
+        switch (playerClass)
+        {
+            case CharClasses.BigBoi:
+                minStatVals[0] = 13; minStatVals[1] = 7; minStatVals[2] = 13; minStatVals[3] = 7; minStatVals[4] = 7; minStatVals[5] = 10;
+                break;
+
+            case CharClasses.Engineer:
+                minStatVals[0] = 9; minStatVals[1] = 9; minStatVals[2] = 10; minStatVals[3] = 12; minStatVals[4] = 8; minStatVals[5] = 7;
+                break;
+
+            case CharClasses.GenericMarine:
+                minStatVals[0] = 11; minStatVals[1] = 11; minStatVals[2] = 10; minStatVals[3] = 9; minStatVals[4] = 7; minStatVals[5] = 9;
+                break;
+
+            case CharClasses.Pilot:
+                minStatVals[0] = 7; minStatVals[1] = 8; minStatVals[2] = 10; minStatVals[3] = 10; minStatVals[4] = 7; minStatVals[5] = 12;
+                break;
+
+            case CharClasses.SpaceWizard:
+                minStatVals[0] = 6; minStatVals[1] = 8; minStatVals[2] = 8; minStatVals[3] = 12; minStatVals[4] = 12; minStatVals[5] = 9;
+                break;
+
+            case CharClasses.SpookyM8:
+                minStatVals[0] = 8; minStatVals[1] = 8; minStatVals[2] = 8; minStatVals[3] = 9; minStatVals[4] = 10; minStatVals[5] = 2;
+                break;
+        }
+
+        
+        for (int i = 0; i < minStatVals.Length; i++)
+        {
+            statVals[i] = minStatVals[i];
+        }
+        pointsToSpend = 10;
+    }
+
 }
 
 public enum CharClasses
