@@ -440,7 +440,6 @@ MonoBehaviour:
   - {fileID: 260433134}
   - {fileID: 1924344123}
   xmlFile: {fileID: 0}
-  isPaused: 0
   pauseCanvas: {fileID: 1682525758}
 --- !u!4 &190262783
 Transform:
@@ -1817,7 +1816,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1458734939}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.03692913, y: 10.190001, z: -0.13586044}
+  m_LocalPosition: {x: -0.03692913, y: 16.921, z: -0.13586044}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2103039952}
@@ -3630,7 +3629,6 @@ MonoBehaviour:
     m_StretchHeight: 0
   miniMap: {fileID: 8400000, guid: fa523506cfcf1914ea2135be4013c086, type: 2}
   icon: {fileID: 8400000, guid: 58cd6ce27c8f1d342a253746c6a9d4bb, type: 2}
-  pauseMenu: {fileID: 0}
   iconCam: {fileID: 2075225302}
 --- !u!114 &2103039954
 MonoBehaviour:
@@ -3644,6 +3642,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerManager: {fileID: 0}
+--- !u!114 &2103039955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2103039948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6bf2f6dea512747886e81edb9157ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentItem: {fileID: 0}
 --- !u!1 &2147482115
 GameObject:
   m_ObjectHideFlags: 0

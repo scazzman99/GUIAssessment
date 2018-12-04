@@ -13,7 +13,7 @@ namespace GUIAssignment
 
         #region Variables
         //bool to see if the game is paused
-        public bool isPaused = false;
+        public static bool isPaused = false;
         //the canvas the pasue menu is on
         public GameObject pauseCanvas;
         #endregion

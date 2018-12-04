@@ -26,8 +26,6 @@ namespace GUIAssignment
         public RenderTexture miniMap;
         public RenderTexture icon;
 
-        //Reference to pause menu to check pause bool
-        public PauseMenu pauseMenu;
 
         //icon camera
         public Camera iconCam;
@@ -49,8 +47,7 @@ namespace GUIAssignment
             mana = maxMana;
             //set the icon camera background to be green
             iconCam.backgroundColor = Color.green;
-            //grab the pauseMenu
-            pauseMenu = GameObject.Find("PauseManager").GetComponent<PauseMenu>();
+            
 
         }
 
@@ -73,7 +70,8 @@ namespace GUIAssignment
             scrW = Screen.width / 16f;
             scrH = Screen.height / 9f;
 
-            if (!pauseMenu.isPaused)
+            //if neither the pause menu or inventory are showing
+            if (!PauseMenu.isPaused && !Inventory.showInv)
             {
                 #region Health, stamina and mana bars
                 //empty rect to have health bar sit on top of

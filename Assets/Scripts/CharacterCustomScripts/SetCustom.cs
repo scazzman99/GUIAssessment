@@ -66,6 +66,8 @@ public class SetCustom : MonoBehaviour
     //the players class
     public CharClasses playerClass = CharClasses.BigBoi;
     public CharClasses[] classes;
+
+    public GUISkin customSkin;
     bool showClasses;
     Vector2 scrollPos;
 
@@ -97,6 +99,7 @@ public class SetCustom : MonoBehaviour
         minStatVals = new int[stats.Length];
         statVals = new int[stats.Length];
         GetStats(playerClass);
+        
 
     }
 
@@ -215,6 +218,7 @@ public class SetCustom : MonoBehaviour
     #region OnGUI
     private void OnGUI()
     {
+        GUI.skin = customSkin;
         //get screen width and height fractions to space buttons
         float scrW = Screen.width / 16f;
         float scrH = Screen.height / 9f;
@@ -225,7 +229,7 @@ public class SetCustom : MonoBehaviour
 
         #region HeadButtons
         //if "-" button is pressed for head
-        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "-"))
+        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[0]))
         {
             //take 1 from headI
             headI--;
@@ -240,10 +244,11 @@ public class SetCustom : MonoBehaviour
             SetSprite("Head", headI);
         }
 
-        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Head: " + headI);
+        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Head: " + headI, customSkin.box);
+        
 
         //if "+" button is pressed for head
-        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "+"))
+        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[1]))
         {
             //add 1 to headI
             headI++;
@@ -264,7 +269,7 @@ public class SetCustom : MonoBehaviour
 
         #region HairButtons
         //if "-" button is pressed for head
-        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "-"))
+        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[0]))
         {
             //take 1 from hairI
             hairI--;
@@ -279,10 +284,10 @@ public class SetCustom : MonoBehaviour
             SetSprite("Hair", hairI);
         }
 
-        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Hair: " + hairI);
+        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Hair: " + hairI, customSkin.box);
 
         //if "+" button is pressed for hair
-        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "+"))
+        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[1]))
         {
             //add 1 to hair
             hairI++;
@@ -302,7 +307,7 @@ public class SetCustom : MonoBehaviour
 
         #region EyesButtons
         //if "-" button is pressed for head
-        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "-"))
+        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[0]))
         {
             //take 1 from headI
             eyesI--;
@@ -317,10 +322,10 @@ public class SetCustom : MonoBehaviour
             SetSprite("Eyes", eyesI);
         }
 
-        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Eyes: " + eyesI);
+        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Eyes: " + eyesI, customSkin.box);
 
         //if "+" button is pressed for head
-        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "+"))
+        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[1]))
         {
             //add 1 to headI
             eyesI++;
@@ -340,7 +345,7 @@ public class SetCustom : MonoBehaviour
 
         #region EyebrowButtons
         //if "-" button is pressed for head
-        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "-"))
+        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[0]))
         {
             //take 1 from headI
             eyebrowsI--;
@@ -355,10 +360,10 @@ public class SetCustom : MonoBehaviour
             SetSprite("Eyebrows", eyebrowsI);
         }
 
-        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Eyebrows: " + eyebrowsI);
+        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Eyebrows: " + eyebrowsI, customSkin.box);
 
         //if "+" button is pressed for head
-        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "+"))
+        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[1]))
         {
             //add 1 to headI
             eyebrowsI++;
@@ -378,7 +383,7 @@ public class SetCustom : MonoBehaviour
 
         #region MouthButtons
         //if "-" button is pressed for mouth
-        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "-"))
+        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[0]))
         {
             //take 1 from mouthI
             mouthI--;
@@ -393,10 +398,10 @@ public class SetCustom : MonoBehaviour
             SetSprite("Mouth", mouthI);
         }
 
-        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Mouth: " + mouthI);
+        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Mouth: " + mouthI, customSkin.box);
 
         //if "+" button is pressed for mouth
-        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "+"))
+        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[1]))
         {
             //add 1 to mouth
             mouthI++;
@@ -417,7 +422,7 @@ public class SetCustom : MonoBehaviour
         //for torso we will simultaniously change torso and pelvis using torsoI
         #region Torso
         //if "-" button is pressed for torso
-        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "-"))
+        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[0]))
         {
             //take 1 from torsoI
             torsoI--;
@@ -435,10 +440,10 @@ public class SetCustom : MonoBehaviour
 
         }
 
-        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Torso: " + torsoI);
+        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Torso: " + torsoI, customSkin.box);
 
         //if "+" button is pressed for torso
-        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "+"))
+        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[1]))
         {
             //add 1 to torso
             torsoI++;
@@ -461,7 +466,7 @@ public class SetCustom : MonoBehaviour
         //will change left and right legs and shins at the same time using legI
         #region Legs
         //if "-" button is pressed for legs
-        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "-"))
+        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[0]))
         {
             //take 1 from legI
             legI--;
@@ -482,10 +487,10 @@ public class SetCustom : MonoBehaviour
 
         }
 
-        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Legs: " + legI);
+        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Legs: " + legI, customSkin.box);
 
         //if "+" button is pressed for torso
-        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "+"))
+        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[1]))
         {
             //add 1 to leg
             legI++;
@@ -510,7 +515,7 @@ public class SetCustom : MonoBehaviour
         //will change left and right arms & forearms at the same time using armI
         #region Arms
         //if "-" button is pressed for arms
-        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "-"))
+        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[0]))
         {
             //take 1 from armI
             armI--;
@@ -531,10 +536,10 @@ public class SetCustom : MonoBehaviour
 
         }
 
-        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Arms: " + armI);
+        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Arms: " + armI, customSkin.box);
 
         //if "+" button is pressed for torso
-        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "+"))
+        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[1]))
         {
             //add 1 to arm
             armI++;
@@ -559,7 +564,7 @@ public class SetCustom : MonoBehaviour
         //set both left and right hands at the same time using handI
         #region Hands
         //if "-" button is pressed for hands
-        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "-"))
+        if (GUI.Button(new Rect(scrW * 0.5f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[0]))
         {
             //take 1 from handI
             handI--;
@@ -575,10 +580,10 @@ public class SetCustom : MonoBehaviour
             SetSprite("HandR", handI);
         }
 
-        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Hand: " + handI);
+        GUI.Box(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2, scrH * 0.5f), "Hand: " + handI, customSkin.box);
 
         //if "+" button is pressed for hand
-        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "+"))
+        if (GUI.Button(new Rect(scrW * 3f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 0.5f, scrH * 0.5f), "", customSkin.customStyles[1]))
         {
             //add 1 to hand
             handI++;
@@ -603,7 +608,7 @@ public class SetCustom : MonoBehaviour
 
         //make a toggle that opens and closes 
         //showClasses = GUI.Toggle(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2f, scrH * 0.5f), showClasses, "Classes");
-        if(GUI.Button(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2f, scrH * 0.5f), playerClass.ToString()))
+        if(GUI.Button(new Rect(scrW * 1f, scrH + buttonAdjust * (scrH * 0.5f), scrW * 2f, scrH * 0.5f), playerClass.ToString(), customSkin.customStyles[2]))
         {
             showClasses = !showClasses;
         }
@@ -622,7 +627,7 @@ public class SetCustom : MonoBehaviour
             for (int i = 0; i < classes.Length; i++)
             {
                 //if class button is pressed
-                if (GUI.Button(new Rect(scrW * 0.5f, 0f + i * scrH * 0.5f, scrW * 2f, scrH * 0.5f), classes[i].ToString()))
+                if (GUI.Button(new Rect(scrW * 0.5f, 0f + i * scrH * 0.5f, scrW * 2f, scrH * 0.5f), classes[i].ToString(), customSkin.button))
                 {
                     playerClass = classes[i];
                     //run function to change default stats etc
