@@ -11,10 +11,11 @@ namespace GUIAssignment
         int _id;
         string _name, _description, _mesh;
         Texture2D _icon;
-
+        ItemType _type;
+        float _health;
 
         #endregion
-
+        
         //use properties to access private vars from outside script
         #region Public properties Get/Set
         public string Name
@@ -47,21 +48,36 @@ namespace GUIAssignment
             set { _icon = value; }
         }
 
-        #endregion
-        //generic constructor
-        public Item()
+        public ItemType Type
         {
-
+            get { return _type; }
+            set { _type = value; }
         }
 
+        public float Health
+        {
+            get { return _health; }
+            set { _health = value; }
+        }
+
+        #endregion
+
         //constructor to enter values
-        public Item(int id, string name, string description, string meshName)
+        public Item(int id, string name, string description, Texture2D icon, float health, ItemType type)
         {
             _id = id;
             _name = name;
             _description = description;
-            _mesh = meshName;
+            _icon = icon;
+            _type = type;
+            _health = health;
         }
 
-    } 
+    }
+
+    public enum ItemType
+    {
+        Consumable,
+        Misc
+    }
 }

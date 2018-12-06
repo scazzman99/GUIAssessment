@@ -3653,7 +3653,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d6bf2f6dea512747886e81edb9157ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentItem: {fileID: 0}
+  inventoryCap: 0
+  skin: {fileID: 11400000, guid: e5e823f66c8438d40ba881a155223924, type: 2}
 --- !u!1 &2147482115
 GameObject:
   m_ObjectHideFlags: 0

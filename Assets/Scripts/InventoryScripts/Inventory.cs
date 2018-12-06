@@ -25,7 +25,8 @@ namespace GUIAssignment
         Vector2 scrollPos = Vector2.zero;
         Vector2 scrR;
         public float inventoryCap;
-
+        PlayerManager playerManager;
+        public GUISkin skin;
         #endregion
 
 
@@ -33,17 +34,20 @@ namespace GUIAssignment
         // Use this for initialization
         void Start()
         {
+            
             scrR = new Vector2(Screen.width / 16, Screen.height / 9);
             inventoryCap = scrR.y / 0.25f;
+            playerManager = GetComponent<PlayerManager>();
 
-            //ADD ONE SPACE APPLE TO INVENTORY
+            
             inventory.Add(ItemLibrary.CreateItem(0));
+            inventory.Add(ItemLibrary.CreateItem(1));
         }
 
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.I))
+            if (Input.GetKeyDown(KeyCode.I) && !PauseMenu.isPaused)
             {
                 ToggleInventory();
             }
@@ -99,6 +103,7 @@ namespace GUIAssignment
         {
             float scrW = Screen.width / 16;
             float scrH = Screen.height / 9;
+            GUI.skin = skin;
 
             if (!PauseMenu.isPaused)
             {
@@ -113,6 +118,25 @@ namespace GUIAssignment
                     {
                         GUI.DrawTexture(new Rect(9f * scrR.x, 2f * scrR.y, scrR.x * 2f, scrR.y * 2f), currentItem.Icon);
                         Debug.Log(currentItem.Icon);
+                        GUI.BeginGroup(new Rect(8f * scrR.x, 4.25f * scrR.y, 4f * scrR.x, scrR.y * 1.75f), "");
+                        GUI.Box(new Rect(0f, 0f, 4 * scrR.x, scrR.y), currentItem.Description);
+                        if(currentItem.Type == ItemType.Consumable)
+                        {
+                            if(GUI.Button(new Rect(0f, 1f * scrR.y, 2f * scrR.x, scrR.y * 0.5f), "Consume"))
+                            {
+                                playerManager.health += currentItem.Health;
+                                inventory.Remove(currentItem);
+                                currentItem = null;
+                            }
+                        }
+
+                        if(GUI.Button(new Rect(2f * scrR.x, 1f * scrR.y, 2f * scrR.x, scrR.y * 0.5f), "Discard"))
+                        {
+                            inventory.Remove(currentItem);
+                            currentItem = null;
+                        }
+                        GUI.EndGroup();
+                        
                     }
                 }
             }

@@ -1,2 +1,158 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram /> 
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CameraBgColor" Collapsed="true">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\ColorPicker\CameraBgColor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ColorPicker" Collapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAIAECCAAKEAAAEAACAAAICAAACCCZg2QIpZIgAY=</HashCode>
+      <FileName>Assets\ColorPicker\ColorPicker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DemoGUI_ColorPickerDemo" Collapsed="true">
+    <Position X="5.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Assets\ColorPicker\DemoGUI_ColorPickerDemo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DrawGUIOrderColorPicker" Collapsed="true">
+    <Position X="7" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAQAAACAAAAAAAEAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Assets\ColorPicker\DrawGUIOrderColorPicker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ObjectColor" Collapsed="true">
+    <Position X="8.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\ColorPicker\ObjectColor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PSColor" Collapsed="true">
+    <Position X="5.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\ColorPicker\PSColor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CustomizeData" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAjAACAEBAABAAAAAAAAAEAAAAQhAAAAAAAQAAEAABA=</HashCode>
+      <FileName>Assets\Scripts\CharacterCustomScripts\SetCustom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SetCustom" Collapsed="true">
+    <Position X="7" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEjAgGY2ZCJBEAAJAAGIBURUBA6jEGQBgWCZSAERMFU=</HashCode>
+      <FileName>Assets\Scripts\CharacterCustomScripts\SetCustom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GUIAssignment.GetCustom" Collapsed="true">
+    <Position X="8.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAEACARAAAIAAAAAEAAAAYhAMABEEAQCAEAAFA=</HashCode>
+      <FileName>Assets\Scripts\CharacterCustomScripts\GetCustom.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GUIAssignment.CharControlWithCam" Collapsed="true">
+    <Position X="8.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQCEigAACCAgQAAMAIIAAAAAgBJESDAAEBAACAAkAA=</HashCode>
+      <FileName>Assets\Scripts\CharControlWithCam.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GUIAssignment.AudioManager" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\GUIScripts\AudioManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GUIAssignment.MainMenu">
+    <Position X="2.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAEAAAAAAAAAAgAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Assets\Scripts\GUIScripts\MainMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GUIAssignment.OptionsData" Collapsed="true">
+    <Position X="10.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAhAAAAAAgAAAAAIKACAAAABIACAAAAAAAAAAgAA=</HashCode>
+      <FileName>Assets\Scripts\GUIScripts\MenuBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GUIAssignment.MenuBase" Collapsed="true">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IQACijAFkAAQgIDgAAIJACiGAIBJGWCAAMiQAQAgkEI=</HashCode>
+      <FileName>Assets\Scripts\GUIScripts\MenuBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GUIAssignment.PauseMenu">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAIAACAAAAAAAAAAEAAAAAAAAAAAAAAEAAAAIAA=</HashCode>
+      <FileName>Assets\Scripts\GUIScripts\PauseMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GUIAssignment.InventoryData" Collapsed="true">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\InventoryScripts\Inventory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GUIAssignment.Inventory" Collapsed="true">
+    <Position X="10.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAQAEAACAAAAgAAAAAAkQAAAAACAACFACAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\InventoryScripts\Inventory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GUIAssignment.Item" Collapsed="true">
+    <Position X="5.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACKAAAAAEgAAQEAABAAAQAgAAAAACAAQAAAAEAAAA=</HashCode>
+      <FileName>Assets\Scripts\InventoryScripts\Item.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GUIAssignment.ItemLibrary" Collapsed="true">
+    <Position X="7" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\InventoryScripts\ItemLibrary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GUIAssignment.PlayerManager" Collapsed="true">
+    <Position X="12.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAjAACIIBCAAAAAAAAAQAAAAAAAEEAAAAQGQIIEQACg=</HashCode>
+      <FileName>Assets\Scripts\PlayerManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="CharClasses" Collapsed="true">
+    <Position X="5.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAEAAAAACAAAAAAABAAAAAEAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\CharacterCustomScripts\SetCustom.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RotationAxis" Collapsed="true">
+    <Position X="7" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\CharControlWithCam.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

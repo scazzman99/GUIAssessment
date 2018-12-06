@@ -17,9 +17,10 @@ namespace GUIAssignment
             int id = 0;
             string name = "";
             string description = "";
-            string mesh = "";
             //icon is a string here as we will load it from resources
             string icon = "";
+            float health = 0f;
+            ItemType type = ItemType.Misc;
             #endregion
 
             switch (ID)
@@ -29,31 +30,32 @@ namespace GUIAssignment
                     name = "Space Apple";
                     description = "Is Irradiated";
                     icon = "SpaceApple_Icon";
-                    mesh = "SpaceApple_Mesh";
+                    type = ItemType.Consumable;
+                    health = 30f;
                     break;
 
+                case 1:
+                    id = 1;
+                    name = "Poison Space Juice";
+                    description = "Maybe avoid drinking this";
+                    icon = "PoisonSpaceJuice_Icon";
+                    type = ItemType.Consumable;
+                    health = -90f;
+                    break;
 
                 default:
                     id = 0;
                     name = "Space Apple";
                     description = "Is Irradiated";
                     icon = "SpaceApple_Icon";
-                    mesh = "SpaceApple_Mesh";
+                    type = ItemType.Consumable;
+                    health = 30f;
                     break;
             }
 
-            //use generic constructor
-            Item item = new Item
-            {
-                Name = name,
-                Description = description,
-                Id = id,
-                Icon = Resources.Load("Icons/" + icon) as Texture2D
-
-            };
-
-            
-            return item;
+            Texture2D tex = Resources.Load("Icons/" + icon) as Texture2D;
+                        
+            return new Item(id, name, description, tex, health, type);
         }
 
     } 
