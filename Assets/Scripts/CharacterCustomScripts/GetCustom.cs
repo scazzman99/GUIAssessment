@@ -10,6 +10,7 @@ namespace GUIAssignment
     public class GetCustom : MonoBehaviour
     {
 
+        #region Variables
         GameObject player;
         Dictionary<string, SpriteRenderer> playerSpriteRenders = new Dictionary<string, SpriteRenderer>();
         CustomizeData data = new CustomizeData();
@@ -20,6 +21,9 @@ namespace GUIAssignment
         int legI, armI, handI,
         hairI, mouthI, eyesI, headI, eyebrowsI, torsoI;
         CharClasses playerClass;
+        #endregion
+
+        #region Start and Awake
         private void Awake()
         {
             playerManager = GetComponent<PlayerManager>();
@@ -47,20 +51,18 @@ namespace GUIAssignment
             //script is attached to player
 
 
+            //get sprite renderers and then load sprites
             GetSpriteRenderers();
             LoadSprites();
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        #endregion
 
         public void GetSpriteRenderers()
         {
             //create an array of sprite renderes made from children of player
             SpriteRenderer[] renderers = this.GetComponentsInChildren<SpriteRenderer>();
+
             //for each sprite renderer
             for (int i = 0; i < renderers.Length; i++)
             {
@@ -71,6 +73,7 @@ namespace GUIAssignment
 
         public void LoadSprites()
         {
+            //load in sprites to specified sprite renderer from dictionary
             playerSpriteRenders["ArmL"].sprite = Resources.Load("CharacterSprites/Arms/UpperArms/Left/UpperArmL_" + armI) as Sprite;
             playerSpriteRenders["ArmR"].sprite = Resources.Load("CharacterSprites/Arms/UpperArms/Right/UpperArmR_" + armI) as Sprite;
             playerSpriteRenders["ForearmL"].sprite = Resources.Load("CharacterSprites/Arms/Forearms/Left/ForearmL_" + armI) as Sprite;
@@ -99,13 +102,17 @@ namespace GUIAssignment
 
         void LoadData()
         {
+            //make a serializer for customizedata
             var serializer = new XmlSerializer(typeof(CustomizeData));
 
+            //while using the file on filepath
             using (var stream = new FileStream(filePath, FileMode.Open))
             {
+                //convert the data from filepath into CustomizeData
                 data = serializer.Deserialize(stream) as CustomizeData;
             }
 
+            //assign player managers variables and sprite indexes from the CustomizeData class data
             playerManager.strCur = data.strCur;
             playerManager.dexCur = data.dexCur;
             playerManager.conCur = data.conCur;

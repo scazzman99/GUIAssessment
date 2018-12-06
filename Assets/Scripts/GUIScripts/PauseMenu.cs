@@ -93,6 +93,7 @@ namespace GUIAssignment
             Time.timeScale = 1;
             //reload the main menu
             SceneManager.LoadScene(0);
+            
         }
 
         #endregion

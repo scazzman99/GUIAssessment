@@ -29,6 +29,7 @@ namespace GUIAssignment
         #endregion
 
 
+        #region Start and Update
         // Use this for initialization
         void Start()
         {
@@ -44,7 +45,7 @@ namespace GUIAssignment
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                showInv = !showInv;
+                ToggleInventory();
             }
 
             if (Input.GetKeyDown(KeyCode.KeypadPlus))
@@ -65,7 +66,9 @@ namespace GUIAssignment
             }
         }
 
-        //Toggles the inventory on and off
+        #endregion
+
+        
         void ToggleInventory()
         {
             //if the inventory is being shown

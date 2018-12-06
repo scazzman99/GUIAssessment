@@ -78,11 +78,12 @@ public class SetCustom : MonoBehaviour
 
     #endregion
 
+    #region Start and Awake
     private void Awake()
     {
         //grab the applications file path and set filePath to returned value
         filePath = Application.persistentDataPath + "/" + fileName + ".xml";
-        
+
     }
 
     // Use this for initialization
@@ -91,23 +92,19 @@ public class SetCustom : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         GetSprites();
         GetSpriteRenderers();
-        //print(playerSpriteRenders.ContainsKey("ShinL"));
-        //define classes array
         
+
         classes = new CharClasses[] { CharClasses.BigBoi, CharClasses.Engineer, CharClasses.GenericMarine, CharClasses.Pilot, CharClasses.SpaceWizard, CharClasses.SpookyM8 };
         stats = new string[] { "Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma" };
         minStatVals = new int[stats.Length];
         statVals = new int[stats.Length];
         GetStats(playerClass);
-        
+
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
 
-    }
+    #endregion
 
     #region GetSprites and SpriteRenderers
 
@@ -118,6 +115,9 @@ public class SetCustom : MonoBehaviour
         //loop through all sprites in resources and add them to their respective lists
 
         //Grabbing sprites from 0 to torsoMax from their listed folder and adding them to torsoList
+
+
+        // Load all torsos to list
         for (int i = 0; i < torsoMax; i++)
         {
             sprite = Resources.Load("CharacterSprites/Torso/TorsoArmour_" + i) as Sprite;
@@ -125,6 +125,8 @@ public class SetCustom : MonoBehaviour
         }
 
         //Grabbing sprites from 0 to pelvisMax from their listed folder and adding them to pelvisList
+
+        // Load all pelvises to list
         for (int i = 0; i < pelvisMax; i++)
         {
             sprite = Resources.Load("CharacterSprites/Legs/Pelvis/Pelvis_" + i) as Sprite;
@@ -133,6 +135,8 @@ public class SetCustom : MonoBehaviour
 
         #region Arms(all parts)
         //Grabbing sprites from 0 to armMax from their listed folder and adding them to Lists for left and right upper arms, forearms and hands
+
+        // Load all the different arms to corresponding lists
         for (int i = 0; i < armMax; i++)
         {
             sprite = Resources.Load("CharacterSprites/Arms/UpperArms/Right/UpperArmR_" + i) as Sprite;
@@ -201,6 +205,7 @@ public class SetCustom : MonoBehaviour
         #endregion
     }
 
+    // Method for attaining all renderers attached as children
     public void GetSpriteRenderers()
     {
         //create an array of sprite renderes made from children of player
@@ -688,11 +693,12 @@ public class SetCustom : MonoBehaviour
     }
     #endregion
 
-    //will be called for every part of a group that needs setting. may be called several times from one button
+    
     public void SetSprite(string group, int index)
     {
         Sprite[] spriteToArray;
 
+        //get list from group, and set sprite to index
         switch (group)
         {
             case "Head":
@@ -766,9 +772,10 @@ public class SetCustom : MonoBehaviour
         }
     }
 
-    //gets the min stats for a class and sets the players current stats to minimums. Also restores point count to 10
+    
     private void GetStats(CharClasses playerClass)
     {
+        //set min stats based on class
         switch (playerClass)
         {
             case CharClasses.BigBoi:
@@ -797,6 +804,7 @@ public class SetCustom : MonoBehaviour
         }
 
         
+        //set stat values to min stats
         for (int i = 0; i < minStatVals.Length; i++)
         {
             statVals[i] = minStatVals[i];
@@ -804,9 +812,10 @@ public class SetCustom : MonoBehaviour
         pointsToSpend = 10;
     }
 
-    //Saves the stat data and customization data
+   
     private void SaveData()
     {
+        //set stats in data to current sprite index's and stat values
         data.armI = armI;
         data.handI = handI;
         data.headI = headI;
@@ -823,6 +832,7 @@ public class SetCustom : MonoBehaviour
         data.wisCur = statVals[4];
         data.charCur = statVals[5];
 
+        //serialize the data and save it
         var serializer = new XmlSerializer(typeof(CustomizeData));
 
         using(var stream = new FileStream(filePath, FileMode.Create))

@@ -39,6 +39,8 @@ namespace GUIAssignment
         // Use this for initialization
         void Start()
         {
+            //pause menu is set off on start
+            PauseMenu.isPaused = false;
             //get values for max health, stamina and mana
             GetStatVals();
             //set the current health, stamina and mana to their max values
@@ -48,12 +50,6 @@ namespace GUIAssignment
             //set the icon camera background to be green
             iconCam.backgroundColor = Color.green;
             
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
 
         }
 
@@ -98,9 +94,6 @@ namespace GUIAssignment
                 //change the background colour of the camera based on character health
                 iconCam.backgroundColor = Color.Lerp(Color.red, Color.green, (health / maxHealth));
             }
-
-
-
 
         }
     } 
